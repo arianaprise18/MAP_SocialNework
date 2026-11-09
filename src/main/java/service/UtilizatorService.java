@@ -34,7 +34,6 @@ public class UtilizatorService implements Service<String, Utilizator> {
         Utilizator user = utilizatorRepo.findOne(gmail)
                 .orElseThrow(() -> new ServiceException("Utilizatorul cu adresa de Gmail specificata nu exista!"));
 
-        // Cautam si stergem toate prieteniile asociate folosind Stream
         List<Tuple<String, String>> friendTuples = StreamSupport.stream(prietenieRepo.findAll().spliterator(), false)
                 .filter(p -> p.getIdUser1().equalsIgnoreCase(gmail) || p.getIdUser2().equalsIgnoreCase(gmail))
                 .map(Prietenie::getId)
