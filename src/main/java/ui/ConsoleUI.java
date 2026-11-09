@@ -2,7 +2,6 @@ package ui;
 
 import domain.Prietenie;
 import domain.Utilizator;
-import domain.validation.CriteriiUtilizator;
 import domain.validation.ValidationException;
 import repository.RepositoryException;
 import service.ComunitatiService;
@@ -12,7 +11,6 @@ import service.UtilizatorService;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class ConsoleUI {
     private final UtilizatorService utilizatorService;
@@ -43,11 +41,12 @@ public class ConsoleUI {
                 else if ("6".equals(opt)) uiShowPrietenii();
                 else if ("7".equals(opt)) uiNrComunitati();
                 else if ("8".equals(opt)) uiCeaMaiSociabilaComunitate();
-                else if ("9".equals(opt)) uiFiltrareUtilizatori();
                 else if ("0".equals(opt)) {
                     System.out.println("Final");
                     return;
-                } else System.out.println("Optiune invalida! Incercati din nou.");
+                } else {
+                    System.out.println("Optiune invalida! Incercati din nou.");
+                }
             } catch (ValidationException | ServiceException | RepositoryException | IllegalArgumentException e) {
                 System.out.println("Eroare: " + e.getMessage());
             }
@@ -64,7 +63,6 @@ public class ConsoleUI {
         System.out.println("6. Afiseaza prietenii");
         System.out.println("7. Numar de comunitati");
         System.out.println("8. Cea mai sociabila comunitate");
-        System.out.println("9. Filtreaza utilizatori");
         System.out.println("0. Iesire");
     }
 
@@ -129,53 +127,5 @@ public class ConsoleUI {
         }
         System.out.println("Cea mai sociabila comunitate (membri):");
         membrii.forEach(System.out::println);
-    }
-
-    private void uiFiltrareUtilizatori() {
-        System.out.println("a. Filtrare dupa prefix prenume");
-        System.out.println("b. Filtrare dupa nume de familie");
-        System.out.println("c. Filtrare dupa keyword in adresa de email");
-        System.out.println("d. Filtrare compusa (prenume incepe cu X SI numele este Y)");
-        System.out.print("Alegeti tipul de filtrare: ");
-        String opt = scanner.nextLine().trim().toLowerCase();
-
-        Predicate<Utilizator> filtru;
-
-        switch (opt) {
-            case "a":
-                System.out.print("Introduceti prefixul prenumelui: ");
-                String prefix = scanner.nextLine().trim();
-                filtru = CriteriiUtilizator.prenumeIncepeCu(prefix);
-                break;
-            case "b":
-                System.out.print("Introduceti numele de familie exact: ");
-                String nume = scanner.nextLine().trim();
-                filtru = CriteriiUtilizator.areNumele(nume);
-                break;
-            case "c":
-                System.out.print("Introduceti sirul cautat in email: ");
-                String kw = scanner.nextLine().trim();
-                filtru = CriteriiUtilizator.emailContine(kw);
-                break;
-            case "d":
-                System.out.print("Prefix prenume: ");
-                String p = scanner.nextLine().trim();
-                System.out.print("Nume de familie: ");
-                String n = scanner.nextLine().trim();
-                // Exemplu de compunere cu and() cerut expres in barem
-                filtru = CriteriiUtilizator.prenumeIncepeCu(p).and(CriteriiUtilizator.areNumele(n));
-                break;
-            default:
-                System.out.println("Optiune necunoscuta!");
-                return;
-        }
-
-        List<Utilizator> filtrati = utilizatorService.filterUsers(filtru);
-        if (filtrati.isEmpty()) {
-            System.out.println("Nu a fost gasit niciun utilizator conform criteriilor.");
-        } else {
-            System.out.println("Rezultate gasite:");
-            filtrati.forEach(System.out::println); // referință la metodă
-        }
     }
 }
