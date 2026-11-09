@@ -60,7 +60,7 @@ public class RepositoryFactory {
     }
 
     private void initCreators() {
-        // Creatori pentru Utilizator
+
         userCreators.put(RepositoryType.MEMORY, InMemoryRepository::new);
         userCreators.put(RepositoryType.FILE, val -> {
             String filePath = getRequiredProperty("file.utilizatori");
