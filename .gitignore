@@ -9,3 +9,5 @@ index-files/
 legal/
 resource-files/
 script-files/
+*.js
+element-list
