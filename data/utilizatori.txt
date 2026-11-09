@@ -1,0 +1,7 @@
+dan.mihai@gmail.com;Dan;Mihai
+ion.popescu@gmail.com;Ion;Popescu
+andrei.radu@gmail.com;Andrei;Radu
+george.vasile@gmail.com;George;Vasile
+elena.marin@gmail.com;Elena;Marin
+ana.stan@gmail.com;Ana;Stan
+maria.ionescu@gmail.com;Maria;Ionescu

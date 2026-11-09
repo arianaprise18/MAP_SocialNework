@@ -1,0 +1,4 @@
+ion.popescu@gmail.com;maria.ionescu@gmail.com;2026-10-19T10:30:00
+andrei.radu@gmail.com;maria.ionescu@gmail.com;2026-10-19T11:00:00
+andrei.radu@gmail.com;elena.marin@gmail.com;2026-10-19T11:30:00
+ana.stan@gmail.com;george.vasile@gmail.com;2026-10-19T12:00:00

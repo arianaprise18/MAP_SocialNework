@@ -1,0 +1,3 @@
+maria.ionescu@yahoo.com;Maria;Ionescu
+invalidEmailFormat;Elena;Marin
+andrei.radu@gmail.com;1234;Radu
